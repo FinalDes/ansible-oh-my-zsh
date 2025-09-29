@@ -1,0 +1,6 @@
+---
+# defaults file for ansible-oh-ny-zsh
+ohmyzsh_repo: "https://github.com/ohmyzsh/ohmyzsh.git"
+ohmyzsh_dir: "{{ ansible_env.HOME }}/.oh-my-zsh"
+zshrc_template: "{{ ansible_env.HOME }}/.zshrc"
+change_shell: true # Set to false to skip changing default shell

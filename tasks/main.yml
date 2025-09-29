@@ -1,0 +1,77 @@
+---
+- name: Check if Zsh is installed
+  ansible.builtin.command:
+    cmd: which zsh
+  register: zsh_check
+  failed_when: false
+  changed_when: false
+
+- name: Install Zsh package
+  ansible.builtin.package:
+    name: zsh
+    state: present
+  become: true
+  when: zsh_check.rc != 0
+
+- name: Check if git is installed
+  ansible.builtin.command:
+    cmd: which git
+  register: git_check
+  failed_when: false
+  changed_when: false
+
+- name: Install git package
+  ansible.builtin.package:
+    name: git
+    state: present
+  become: true
+  when: git_check.rc != 0
+
+- name: Check if Oh My Zsh is already installed
+  ansible.builtin.stat:
+    path: "{{ ohmyzsh_dir }}"
+  register: ohmyzsh_stat
+
+- name: Clone Oh My Zsh repository to home directory
+  ansible.builtin.git:
+    repo: "{{ ohmyzsh_repo }}"
+    dest: "{{ ohmyzsh_dir }}"
+    version: master
+    depth: 1
+    update: true
+  when: not ohmyzsh_stat.stat.exists
+
+- name: Check for existing .zshrc
+  ansible.builtin.stat:
+    path: "{{ zshrc_template }}"
+  register: zshrc_stat
+
+- name: Backup existing .zshrc if it exists
+  ansible.builtin.copy:
+    src: "{{ zshrc_template }}"
+    dest: "{{ zshrc_template }}.pre-oh-my-zsh"
+    mode: "0644"
+    remote_src: true
+  when: zshrc_stat.stat.exists
+
+- name: Copy Oh My Zsh template .zshrc
+  ansible.builtin.copy:
+    src: "{{ ohmyzsh_dir }}/templates/zshrc.zsh-template"
+    dest: "{{ zshrc_template }}"
+    mode: "0644"
+    remote_src: true
+  when: not zshrc_stat.stat.exists
+
+- name: Ensure .zshrc ownership
+  ansible.builtin.file:
+    path: "{{ zshrc_template }}"
+    owner: "{{ ansible_env.USER }}"
+    group: "{{ ansible_env.USER }}"
+    mode: "0644"
+
+- name: Change default shell to Zsh
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    shell: /bin/zsh
+  become: true
+  when: change_shell

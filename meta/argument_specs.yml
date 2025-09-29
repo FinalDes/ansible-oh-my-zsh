@@ -1,0 +1,20 @@
+---
+argument_specs:
+  main:
+    options:
+      ohmyzsh_dir:
+        type: str
+        default: "{{ ansible_env.HOME }}/.oh-my-zsh"
+        description: Path to install Oh My Zsh
+      zshrc_template:
+        type: str
+        default: "{{ ansible_env.HOME }}/.zshrc"
+        description: Path to the .zshrc file
+      ohmyzsh_repo:
+        type: str
+        default: "https://github.com/ohmyzsh/ohmyzsh.git"
+        description: Repository URL for Oh My Zsh
+      change_shell:
+        type: bool
+        default: true
+        description: Whether to change the user's shell to zsh
