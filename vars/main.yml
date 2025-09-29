@@ -1,2 +1,4 @@
 # vars file for ansible-oh-ny-zsh
 # Comment
+ohmyzsh_repo: "https://github.com/ohmyzsh/ohmyzsh.git"
+zshrc_template: "{{ ansible_env.HOME }}/.zshrc"
