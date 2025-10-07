@@ -2,3 +2,4 @@
 # Comment
 ohmyzsh_repo: "https://github.com/ohmyzsh/ohmyzsh.git"
 zshrc_template: "{{ ansible_env.HOME }}/.zshrc"
+zsh_custom: "{{ ohmyzsh_dir }}/custom"

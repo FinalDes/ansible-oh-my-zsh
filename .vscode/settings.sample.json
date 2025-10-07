@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "zshrc.j2": "jinja-shell",
+    "*.yml": "ansible"
+  },
+  "ansible.python.interpreterPath": "/home/alex/project/ansible-roles/ansible-oh-ny-zsh/.venv/bin/python"
+}

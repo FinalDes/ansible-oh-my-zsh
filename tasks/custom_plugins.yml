@@ -1,0 +1,22 @@
+---
+- name: Clone zsh-syntax-highlighting repository to custom plugins directory
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting.git
+    dest: "{{ zsh_custom }}/plugins/zsh-syntax-highlighting"
+    version: master
+    depth: 1
+    update: true
+- name: Clone zsh-autosuggestions repository to custom plugins directory
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git
+    dest: "{{ zsh_custom }}/plugins/zsh-autosuggestions"
+    version: master
+    depth: 1
+    update: true
+- name: Clone zsh-autosuggestions repository to custom plugins directory
+  ansible.builtin.git:
+    repo: https://github.com/zsh-users/zsh-completions.git
+    dest: "{{ zsh_custom }}/plugins/zsh-completions"
+    version: master
+    depth: 1
+    update: true
