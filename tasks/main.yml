@@ -41,6 +41,9 @@
     update: true
   when: not ohmyzsh_stat.stat.exists
 
+- name: Include custom plugins setup tasks
+  ansible.builtin.include_tasks: custom_plugins.yml
+
 - name: Include zshrc setup tasks
   ansible.builtin.include_tasks: zshrc.yml
   when: replace_zshrc
