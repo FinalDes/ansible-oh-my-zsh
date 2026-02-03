@@ -22,6 +22,6 @@
 - name: Ensure .zshrc ownership
   ansible.builtin.file:
     path: "{{ zshrc_template }}"
-    owner: "{{ ansible_env.USER }}"
-    group: "{{ ansible_env.USER }}"
+    owner: "{{ ansible_facts['env']['USER'] }}"
+    group: "{{ ansible_facts['env']['USER'] }}"
     mode: "0644"

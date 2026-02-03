@@ -4,7 +4,7 @@ argument_specs:
     options:
       ohmyzsh_dir:
         type: str
-        default: "{{ ansible_env.HOME }}/.oh-my-zsh"
+        default: "{{ ansible_facts['env']['HOME'] }}/.oh-my-zsh"
         description: Path to install Oh My Zsh
       replace_zshrc:
         type: bool
