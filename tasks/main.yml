@@ -6,6 +6,15 @@
   failed_when: false
   changed_when: false
 
+# Update apt cache before installing Zsh (Debian/Ubuntu only)
+- name: Update apt cache
+  ansible.builtin.apt:
+    update_cache: yes
+  become: true
+  when:
+    - ansible_facts["os_family"] == "Debian"
+    - zsh_check.rc != 0
+
 - name: Install Zsh package
   ansible.builtin.package:
     name: zsh
