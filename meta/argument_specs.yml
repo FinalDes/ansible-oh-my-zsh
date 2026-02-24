@@ -6,7 +6,7 @@ argument_specs:
         type: str
         default: "{{ ansible_facts['env']['HOME'] }}/.oh-my-zsh"
         description: Path to install Oh My Zsh
-      replace_zshrc:
+      backup_zshrc:
         type: bool
         default: true
         description: Replace .zshrc with template

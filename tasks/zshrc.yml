@@ -9,7 +9,7 @@
     dest: "{{ zshrc_template }}.pre-oh-my-zsh"
     mode: "0644"
     remote_src: true
-  when: zshrc_stat.stat.exists
+  when: zshrc_stat.stat.exists and backup_zshrc
 
 - name: Copy Oh My Zsh template .zshrc
   ansible.builtin.copy:
